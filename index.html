@@ -1,0 +1,77 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tá Valendo!</title>
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#14b8a6" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+          tailwind.config = {
+            darkMode: 'class',
+            theme: {
+              extend: {
+                colors: {
+                  'brand-green': '#10b981',
+                  'brand-yellow': '#f59e0b',
+                  'brand-red': '#ef4444',
+                  'primary': {
+                    '500': '#2dd4bf',
+                    '600': '#14b8a6',
+                    '700': '#0d9488'
+                  },
+                  'secondary': '#6366f1',
+                },
+                animation: {
+                  'fade-in': 'fade-in 0.3s ease-out forwards',
+                  'fade-in-up': 'fade-in-up 0.4s ease-out forwards',
+                },
+                keyframes: {
+                  'fade-in': {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                  },
+                  'fade-in-up': {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                  },
+                }
+              },
+            },
+          }
+        </script>
+      <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react-ga4": "https://esm.sh/react-ga4@^2.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.15.0"
+  }
+}
+</script>
+    <link rel="stylesheet" href="/index.css">
+</head>
+      <body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+        <div id="root"></div>
+        <script type="module" src="/index.tsx"></script>
+        <!-- PWA Service Worker -->
+        <script>
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+              navigator.serviceWorker.register('/sw.js').then(registration => {
+                console.log('SW registered: ', registration);
+              }).catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+              });
+            });
+          }
+        </script>
+      </body>
+    </html>
